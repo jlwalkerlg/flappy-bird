@@ -43,17 +43,17 @@ class Game {
     this.bird.setInitialMotion();
     if (this.maxScore === null) this.setMaxScore(0);
     requestAnimationFrame(this.update);
-    document.addEventListener('keydown', this.startGame);
-    canvas.addEventListener('mousedown', this.startGame);
+    document.addEventListener('keydown', this.handleStartGame);
+    canvas.addEventListener('mousedown', this.handleStartGame);
   };
 
   // start game animation
   start = e => {
     this.state = 'RUNNING';
-    document.removeEventListener('keydown', this.startGame);
-    canvas.removeEventListener('mousedown', this.startGame);
-    document.addEventListener('keydown', this.birdJump);
-    canvas.addEventListener('mousedown', this.birdJump);
+    document.removeEventListener('keydown', this.handleStartGame);
+    canvas.removeEventListener('mousedown', this.handleStartGame);
+    document.addEventListener('keydown', this.handleBirdJump);
+    canvas.addEventListener('mousedown', this.handleBirdJump);
     this.bird.jump(e);
     this.bird.a = 800;
     this.pipes.forEach(pipe => (pipe.u = -150));
@@ -63,8 +63,8 @@ class Game {
 
   stop = () => {
     this.state = 'STOPPED';
-    document.removeEventListener('keydown', this.birdJump);
-    canvas.removeEventListener('mousedown', this.birdJump);
+    document.removeEventListener('keydown', this.handleBirdJump);
+    canvas.removeEventListener('mousedown', this.handleBirdJump);
     this.pipes.forEach(pipe => (pipe.u = 0));
     this.floor.u = 0;
   };
@@ -81,13 +81,13 @@ class Game {
     this.bird.a = 0;
     if (this.score >= this.maxScore) this.setMaxScore(this.score);
     this.displayGameOverMenu();
-    document.addEventListener('keypress', this.restartGame);
-    canvas.addEventListener('mousedown', this.restartGame);
+    document.addEventListener('keypress', this.handleRestartGame);
+    canvas.addEventListener('mousedown', this.handleRestartGame);
   };
 
   restart = () => {
-    document.removeEventListener('keypress', this.restartGame);
-    canvas.removeEventListener('mousedown', this.restartGame);
+    document.removeEventListener('keypress', this.handleRestartGame);
+    canvas.removeEventListener('mousedown', this.handleRestartGame);
     this.state = 'READY';
     this.bird.y = canvas.height / 2 - this.bird.h / 2;
     this.bird.setInitialMotion();
@@ -201,7 +201,7 @@ class Game {
     );
   };
 
-  startGame = e => {
+  handleStartGame = e => {
     if (e.key) {
       if (e.key === ' ') {
         this.start(e);
@@ -211,7 +211,7 @@ class Game {
     }
   };
 
-  birdJump = e => {
+  handleBirdJump = e => {
     if (e.key) {
       if (e.key === ' ') {
         this.bird.jump(e);
@@ -221,7 +221,7 @@ class Game {
     }
   };
 
-  restartGame = e => {
+  handleRestartGame = e => {
     if (e.key) {
       if (e.key === ' ') {
         this.restart(e);
