@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #142735;
+}
+
+img {
+    display: none;
+}
+
+#canvas {
+    background: url('./assets/sprites/background-day.png') center/cover no-repeat;
+}
