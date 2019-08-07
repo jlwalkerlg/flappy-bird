@@ -98,8 +98,8 @@ class Game {
     this.floor.u = -150;
     this.score = 0;
     this.pipes.forEach(pipe => pipe.setInitialPosition());
-    document.addEventListener('keydown', this.startGame);
-    canvas.addEventListener('mousedown', this.startGame);
+    document.addEventListener('keydown', this.handleStartGame);
+    canvas.addEventListener('mousedown', this.handleStartGame);
   };
 
   // display game over menu
