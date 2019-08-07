@@ -17,3 +17,9 @@ export function drawRotatedImage(img, sx, sy, sw, sh, dx, dy, dw, dh, deg) {
 
   ctx.restore();
 }
+
+export function createImage(src) {
+  const image = document.createElement('img');
+  image.src = src;
+  return image;
+}
