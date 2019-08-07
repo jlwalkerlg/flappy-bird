@@ -31,23 +31,23 @@ class Pipe {
   }
 
   // helper function to generate random number between a given min and max
-  randomNum(min, max) {
+  randomNum = (min, max) => {
     return min + Math.random() * (max - min);
-  }
+  };
 
-  setInitialPosition() {
+  setInitialPosition = () => {
     this.x = canvas.width * 2 + this.maxSeparation * this.pipeNo;
     this.reloadVerticalPosition();
-  }
+  };
 
   // reload new pipe position after going off screen
-  reloadPosition(pipeNo) {
+  reloadPosition = pipeNo => {
     this.reloadHorizontalPosition(pipeNo);
     this.reloadVerticalPosition();
-  }
+  };
 
   // reload new pipe x position after going off screen
-  reloadHorizontalPosition(pipeNo) {
+  reloadHorizontalPosition = pipeNo => {
     let prevPipe;
     if (pipeNo === 0) {
       prevPipe = this.game.pipes[this.game.pipes.length - 1];
@@ -58,10 +58,10 @@ class Pipe {
       prevPipe.x +
       prevPipe.w +
       this.randomNum(this.minSeparation, this.maxSeparation);
-  }
+  };
 
   // reload new pipe height and gap after going off screen
-  reloadVerticalPosition() {
+  reloadVerticalPosition = () => {
     this.bottomOfTopPipe = this.randomNum(
       this.minHeight,
       canvas.height - this.floorHeight - this.minHeight - this.maxGap
@@ -70,10 +70,10 @@ class Pipe {
       this.bottomOfTopPipe + this.minGap,
       this.bottomOfTopPipe + this.maxGap
     );
-  }
+  };
 
   // draw pipe
-  draw() {
+  draw = () => {
     // draw pipe head separate from the pipe body so it does not become stretched/squashed
 
     // draw top pipe head
@@ -126,17 +126,17 @@ class Pipe {
       this.w,
       canvas.height - this.topOfBottomPipe - this.headHeight
     );
-  }
+  };
 
   // update pipe position
-  update(dt) {
+  update = dt => {
     if (this.x < -this.w) {
       // if pipe goes offscreen, reset position
       this.reloadPosition(this.pipeNo);
     } else {
       this.x += this.u * dt;
     }
-  }
+  };
 }
 
 export default Pipe;

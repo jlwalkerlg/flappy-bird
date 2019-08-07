@@ -28,54 +28,54 @@ class Bird {
   }
 
   // set initial bird position
-  setInitialPosition() {
+  setInitialPosition = () => {
     this.x = canvas.width * 0.4;
     this.y = canvas.height / 2 - this.h / 2;
-  }
+  };
 
   // set initial bird velocity and acceleration
-  setInitialMotion(dir) {
+  setInitialMotion = dir => {
     if (!dir) dir = 1;
     this.a = -451 * dir;
     this.v = 91 * dir;
-  }
+  };
 
   // draw bird
-  draw() {
+  draw = () => {
     drawRotatedImage(this.img, this.x, this.y, this.w, this.h, this.phi);
-  }
+  };
 
   // make bird jump
-  jump(e) {
+  jump = e => {
     this.v = -280;
     this.jumpTime = e.timeStamp;
     this.phi = -20;
     this.dphi = 0;
     wingSound.currentTime = 0;
     wingSound.play();
-  }
+  };
 
   // check if bird collided with a pipe
-  detectCollision(pipe) {
+  detectCollision = pipe => {
     return (
       ((this.right > pipe.x && this.right < pipe.right) ||
         (this.x > pipe.x && this.x < pipe.right)) &&
       (this.y < pipe.bottomOfTopPipe || this.bottom > pipe.topOfBottomPipe)
     );
-  }
+  };
 
   // detect if bird passed a pipe
-  detectPass(pipe) {
+  detectPass = pipe => {
     // if bird was before pipe in previous frame, and is now after the pipe, bird passed pipe
     return this.x <= pipe.prevRight && this.x >= pipe.right;
-  }
+  };
 
-  detectFall() {
+  detectFall = () => {
     return this.y + this.h >= canvas.height - this.floorHeight;
-  }
+  };
 
   // update bird velocity and position
-  update(dt) {
+  update = dt => {
     if (this.game.state === 'READY') {
       if (
         (this.y + this.h / 2 > canvas.height / 2 &&
@@ -104,7 +104,7 @@ class Bird {
     if (this.phi > 90) {
       this.phi = 90;
     }
-  }
+  };
 }
 
 export default Bird;
