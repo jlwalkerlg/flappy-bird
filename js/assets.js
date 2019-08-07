@@ -44,7 +44,7 @@ export const numberSprites = [
 ];
 
 // sounds
-export const wingSound = document.getElementById('wing-sound');
-export const pointSound = document.getElementById('point-sound');
-export const hitSound = document.getElementById('hit-sound');
-export const dieSound = document.getElementById('die-sound');
+export const wingSound = new Audio('../assets/audio/wing.wav');
+export const pointSound = new Audio('../assets/audio/point.wav');
+export const hitSound = new Audio('../assets/audio/hit.wav');
+export const dieSound = new Audio('../assets/audio/die.wav');
